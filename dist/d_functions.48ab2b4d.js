@@ -166,6 +166,88 @@ var function7 = function function7(x, y) {
   return console.log(x, y);
 };
 function7(10); // no error
+
+//function expression
+var fx = function fx(x, y) {
+  return x + y;
+};
+var result = fx(10, 20);
+console.log(result);
+var display = function display() {
+  return "display function exp";
+};
+console.log(display());
+
+// rest parameter
+function restFunction() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+  for (var _i = 0, _args = args; _i < _args.length; _i++) {
+    var item = _args[_i];
+    console.log("parameter :", item);
+  }
+}
+restFunction(10, 20, 30);
+
+// javascript has argument object
+function hello() {
+  console.log(arguments);
+}
+hello("arg1", 40);
+
+// javascript important functions call, apply and bind
+// With call(), an object can use a method belonging to another object.
+
+var user = {
+  display: function display() {
+    console.log(this.firstName + this.lastName);
+  }
+};
+var userData = {
+  firstName: "Call",
+  lastName: "Vivobook"
+};
+user.display.call(userData);
+
+// With the apply() method, you can write a method that can be used on different objects.
+var user2 = {
+  display: function display() {
+    console.log(this.firstName + this.lastName);
+  }
+};
+var userData2 = {
+  firstName: "Apply",
+  lastName: "Vivobook"
+};
+user2.display.apply(userData2);
+
+// The difference is:
+// The call() method takes arguments separately.
+// The apply() method takes arguments as an array.
+
+var car = {
+  display: function display(city, price) {
+    console.log(this.name, city, price);
+  }
+};
+var carObj = {
+  name: "ASUS ProBook"
+};
+car.display.call(carObj, "PUNE", 50000);
+car.display.apply(carObj, ["SBPVT", 100000]); // accept arg in array
+
+//bind method - With the bind() method, an object can borrow a method from another object.
+var car2 = {
+  display: function display(city, price) {
+    console.log(this.name, city, price);
+  }
+};
+var carObj2 = {
+  name: "ASUS ProBook"
+};
+var methodBorrow = car2.display.bind(carObj2, "BMBMW", 5454554); // borrow method from another object and accept arg
+methodBorrow(); // show console.log because it borrow method from obj
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -191,7 +273,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60004" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60602" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -117,62 +117,105 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
+})({"topics/h_set&map.js":[function(require,module,exports) {
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+// set - Set is a collection of unique values
+
+var data = new Set(["CORE", "NVDIA", 10, 10, "NVDIA"]); // remove duplicate values
+console.log(data);
+var _iterator = _createForOfIteratorHelper(data),
+  _step;
+try {
+  for (_iterator.s(); !(_step = _iterator.n()).done;) {
+    var value = _step.value;
+    console.log(value);
   }
-  return bundleURL;
+} catch (err) {
+  _iterator.e(err);
+} finally {
+  _iterator.f();
 }
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
+var set1 = new Set([10, 40, 10, 20, 50, 30]);
+console.log(set1);
+
+// set method
+// adding element to the array
+set1.add("ASUS");
+set1.add("PROBOOK");
+console.log(set1);
+set1.delete(10);
+console.log(set1);
+console.log(set1.size); // remember size is not a function
+
+// values - return iterable obj that contain values
+var values = set1.values();
+var _iterator2 = _createForOfIteratorHelper(values),
+  _step2;
+try {
+  for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+    var _value = _step2.value;
+    console.log(_value);
   }
-  return '/';
+
+  // lets work with map - A Map holds key-value pairs where the keys can be any datatype.
+  // A Map remembers the original insertion order of the keys.
+} catch (err) {
+  _iterator2.e(err);
+} finally {
+  _iterator2.f();
 }
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-function updateLink(link) {
-  var newLink = link.cloneNode();
-  newLink.onload = function () {
-    link.remove();
-  };
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-var cssTimeout = null;
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
+var map1 = new Map([["A", "Apple"], ["B", "Banana"], ["C", "Cherry"]]);
+console.log(map1); // Map(3) {'A' => 'Apple', 'B' => 'Banana', 'C' => 'Cherry'}
+var _iterator3 = _createForOfIteratorHelper(map1),
+  _step3;
+try {
+  for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+    var item = _step3.value;
+    console.log(item[0], item[1]); // because item itself array[]
   }
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-    cssTimeout = null;
-  }, 50);
+
+  // adding new element to the array -set method
+} catch (err) {
+  _iterator3.e(err);
+} finally {
+  _iterator3.f();
 }
-module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"style.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+map1.set("E", "EEEEEEEE");
+console.log(map1);
+console.log(map1.delete("A")); // deleting element based on key - true / false
+console.log(map1);
+
+// access map elements
+console.log(map1.get("B"));
+
+// entries() function
+var _iterator4 = _createForOfIteratorHelper(map1.entries()),
+  _step4;
+try {
+  for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+    var entry = _step4.value;
+    console.log(entry);
+  }
+} catch (err) {
+  _iterator4.e(err);
+} finally {
+  _iterator4.f();
+}
+var _iterator5 = _createForOfIteratorHelper(map1.values()),
+  _step5;
+try {
+  for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+    var _value2 = _step5.value;
+    console.log(_value2);
+  }
+} catch (err) {
+  _iterator5.e(err);
+} finally {
+  _iterator5.f();
+}
+},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -197,7 +240,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60602" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52778" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
@@ -341,5 +384,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/style.e308ff8e.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","topics/h_set&map.js"], null)
+//# sourceMappingURL=/h_set&map.a25caf57.js.map
